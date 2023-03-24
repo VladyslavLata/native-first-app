@@ -6,10 +6,10 @@ export default function App() {
   return (
     <>
       <RegistrationScreen />
-      <View style={styles.container}>
-        <Text>Open up App.js to stalasdashhgdsfsf sd hjd</Text>
+      {/* <View style={styles.container}>
+        <Text>Open up App.js to stalasdashhgdsfsf sd hj</Text>
         <StatusBar style="auto" />
-      </View>
+      </View> */}
     </>
   );
 }

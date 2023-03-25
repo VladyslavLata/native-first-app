@@ -1,8 +1,19 @@
 import { useState } from "react";
 import { TextInput, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export const Input = ({ value, placeholder, onChangeText }) => {
+export const InputPassword = ({ value, placeholder, onChangeText }) => {
   [isFocused, setisFocused] = useState(false);
+
+  const [currentIcon, setCurrentIcon] = useState("visibility");
+
+  const toggleIcon = () => {
+    if (currentIcon === "visibility") {
+      setCurrentIcon("visibility-off");
+    } else {
+      setCurrentIcon("visibility");
+    }
+  };
   return (
     <TextInput
       style={[
@@ -14,12 +25,13 @@ export const Input = ({ value, placeholder, onChangeText }) => {
       ]}
       value={value}
       onChangeText={onChangeText}
+      secureTextEntry={true}
       onFocus={() => setisFocused(true)}
       onBlur={() => setisFocused(false)}
       cursorColor={"#FF6C00"}
       placeholder={placeholder}
       placeholderTextColor={"#bdbdbd"}
-      maxLength={30}
+      maxLength={25}
     />
   );
 };
@@ -34,8 +46,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
     lineHeight: 1.18,
-    // borderColor: isFocused ? "#FF6C00" : "#E8E8E8",
-    // backgroundColor: isFocused ? "#ffffff" : "#f6f6f6",
     color: "#212121",
   },
 });

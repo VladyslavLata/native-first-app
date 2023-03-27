@@ -1,8 +1,12 @@
+import React from "react";
 import { useState } from "react";
+import { useInputFocusedControl } from "../../hooks/useInputFocusedControl";
 import { TextInput, StyleSheet } from "react-native";
 
 export const Input = ({ value, placeholder, onChangeText }) => {
-  [isFocused, setisFocused] = useState(false);
+  const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl();
+  // [isFocused, setisFocused] = useState(false);
+  console.log("d" + isFocused);
   return (
     <TextInput
       style={[
@@ -14,12 +18,12 @@ export const Input = ({ value, placeholder, onChangeText }) => {
       ]}
       value={value}
       onChangeText={onChangeText}
-      onFocus={() => setisFocused(true)}
-      onBlur={() => setisFocused(false)}
+      onBlur={() => onBlurInput()}
+      onFocus={() => onFocusedInput()}
       cursorColor={"#FF6C00"}
       placeholder={placeholder}
       placeholderTextColor={"#bdbdbd"}
-      maxLength={30}
+      maxLength={40}
     />
   );
 };

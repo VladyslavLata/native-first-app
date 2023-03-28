@@ -5,8 +5,6 @@ import { TextInput, StyleSheet, View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const InputPassword = ({ value, placeholder, onChangeText }) => {
-  // [isFocused, setisFocused] = useState(false);
-  // console.log(isFocused);
   const [currentIcon, setCurrentIcon] = useState("visibility");
   const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl();
 

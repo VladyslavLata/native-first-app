@@ -5,8 +5,7 @@ import { TextInput, StyleSheet } from "react-native";
 
 export const Input = ({ value, placeholder, onChangeText }) => {
   const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl();
-  // [isFocused, setisFocused] = useState(false);
-  console.log("d" + isFocused);
+
   return (
     <TextInput
       style={[
@@ -18,8 +17,8 @@ export const Input = ({ value, placeholder, onChangeText }) => {
       ]}
       value={value}
       onChangeText={onChangeText}
-      onBlur={() => onBlurInput()}
-      onFocus={() => onFocusedInput()}
+      onBlur={onBlurInput}
+      onFocus={onFocusedInput}
       cursorColor={"#FF6C00"}
       placeholder={placeholder}
       placeholderTextColor={"#bdbdbd"}
@@ -38,8 +37,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
     lineHeight: 1.18,
-    // borderColor: isFocused ? "#FF6C00" : "#E8E8E8",
-    // backgroundColor: isFocused ? "#ffffff" : "#f6f6f6",
     color: "#212121",
   },
 });

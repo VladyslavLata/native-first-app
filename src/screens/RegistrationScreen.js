@@ -12,8 +12,8 @@ export const RegistrationScreen = () => {
         }
       }}
     >
-      <InputPassword />
       <Input />
+      <InputPassword />
     </AuthLayout>
   );
 };

@@ -4,9 +4,12 @@ import { useInputFocusedControl } from "../../hooks/useInputFocusedControl";
 import { TextInput, StyleSheet, View, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export const InputPassword = ({ value, placeholder, onChangeText }) => {
+export const InputPassword = ({ valuePassword, placeholder, onChangeText }) => {
   const [currentIcon, setCurrentIcon] = useState("visibility");
-  const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl();
+  const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl(
+    "isFocusedPassword",
+    "setIsFocusedPassword"
+  );
 
   const toggleIcon = () => {
     if (currentIcon === "visibility") {
@@ -26,7 +29,7 @@ export const InputPassword = ({ value, placeholder, onChangeText }) => {
             backgroundColor: isFocused ? "#ffffff" : "#f6f6f6",
           },
         ]}
-        value={value}
+        value={valuePassword}
         onChangeText={onChangeText}
         secureTextEntry={currentIcon === "visibility"}
         onFocus={onFocusedInput}
@@ -50,6 +53,7 @@ export const InputPassword = ({ value, placeholder, onChangeText }) => {
 const styles = StyleSheet.create({
   wrapp: {
     position: "relative",
+    // marginBottom: 40,
     width: "100%",
   },
   input: {

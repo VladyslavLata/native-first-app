@@ -14,9 +14,9 @@ export const AuthLayout = ({ onKeybordHide, children }) => {
           style={styles.bgImage}
           // imageStyle={{ resizeMode: "contain" }}
         >
-          <View
+          {/* <View
             style={{ width: 20, height: 20, backgroundColor: "red" }}
-          ></View>
+          ></View> */}
           {children}
         </ImageBackground>
       </View>

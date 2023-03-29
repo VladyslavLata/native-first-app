@@ -1,10 +1,19 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { useInputFocusedControl } from "../../hooks/useInputFocusedControl";
 import { TextInput, StyleSheet } from "react-native";
 
-export const Input = ({ value, placeholder, onChangeText }) => {
-  const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl();
+export const Input = ({
+  valueInput,
+  placeholder,
+  onChange,
+  isFocusedInput,
+  setIsFocusedInput,
+}) => {
+  const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl(
+    `${isFocusedInput}`,
+    `${setIsFocusedInput}`
+  );
 
   return (
     <TextInput
@@ -15,8 +24,8 @@ export const Input = ({ value, placeholder, onChangeText }) => {
           backgroundColor: isFocused ? "#ffffff" : "#f6f6f6",
         },
       ]}
-      value={value}
-      onChangeText={onChangeText}
+      value={valueInput}
+      onChange={onChange}
       onBlur={onBlurInput}
       onFocus={onFocusedInput}
       cursorColor={"#FF6C00"}

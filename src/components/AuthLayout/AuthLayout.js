@@ -3,11 +3,12 @@ import {
   TouchableWithoutFeedback,
   ImageBackground,
   StyleSheet,
+  Keyboard,
 } from "react-native";
 
 export const AuthLayout = ({ onKeybordHide, children }) => {
   return (
-    <TouchableWithoutFeedback onPress={(e) => onKeybordHide(e)}>
+    <TouchableWithoutFeedback onPress={onKeybordHide}>
       <View style={styles.container}>
         <ImageBackground
           source={require("../../Img/BgApp.webp")}

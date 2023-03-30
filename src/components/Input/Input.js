@@ -9,6 +9,7 @@ export const Input = ({
   onChange,
   isFocusedInput,
   setIsFocusedInput,
+  onInputIsFocused,
 }) => {
   const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl(
     `${isFocusedInput}`,
@@ -27,11 +28,15 @@ export const Input = ({
       value={valueInput}
       onChange={onChange}
       onBlur={onBlurInput}
-      onFocus={onFocusedInput}
+      onFocus={() => {
+        onFocusedInput();
+        onInputIsFocused(true);
+      }}
       cursorColor={"#FF6C00"}
       placeholder={placeholder}
       placeholderTextColor={"#bdbdbd"}
       maxLength={40}
+      onKeyPress={(keyPress) => console.log(keyPress.nativeEvent.key)}
     />
   );
 };

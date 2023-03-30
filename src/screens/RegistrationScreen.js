@@ -1,5 +1,13 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+} from "react-native";
 import { AuthLayout } from "../components/AuthLayout/AuthLayout";
 import { Input } from "../components/Input/Input";
 import { InputPassword } from "../components/InputPassword/InputPassword";
@@ -10,59 +18,74 @@ const defaultAuthInfo = { name: "", email: "", password: "" };
 
 export const RegistrationScreen = () => {
   const [authInfo, setAuthInfo] = useState(defaultAuthInfo);
+  const [inputIsFocused, setInputIsFocused] = useState(false);
+
+  useEffect(() => {});
+
+  const keyboardHide = () => {
+    setInputIsFocused(false);
+    Keyboard.dismiss();
+  };
+
+  const keyboardHidePressBtn = () => {
+    keyboardHide();
+    setAuthInfo(defaultAuthInfo);
+  };
 
   return (
-    <AuthLayout
-      onKeybordHide={(e) => {
-        if (true) {
-          console.log("kk");
-        }
-      }}
-    >
-      <LoginBox registration={true} header="Реєстрація">
-        <View style={styles.InputsWrapp}>
-          <Input
-            isFocusedInput="isFocusedLogin"
-            setIsFocusedInput="setIsFocusedLogin"
-            valueInput={authInfo.name}
-            onChange={(value) => setAuthInfo({ ...authInfo, name: value })}
-            placeholder="Логін"
-          />
-          <View style={styles.InputWrapp}>
-            {/* <TextInput
-            style={{ width: "100%", height: 50, backgroundColor: "#fff" }}
-            value={authInfo.email}
-            onChangeText={(value1) => {
-              setAuthInfo({ ...authInfo, email: value1 });
-            }}
-            placeholder="Єлектронна адреса"
-          /> */}
-
+    <AuthLayout onKeybordHide={keyboardHide}>
+      <KeyboardAvoidingView
+        style={{ flex: 1, width: "100%", justifyContent: "flex-end" }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <LoginBox
+          registration={true}
+          header="Реєстрація"
+          keyboardIsVisible={inputIsFocused}
+        >
+          <View style={styles.InputsWrapp}>
             <Input
-              isFocusedInput="isFocusedEmail"
-              setIsFocusedInput="setIsFocusedEmail"
-              valueInput={authInfo.email}
-              onChange={(value) => {
-                setAuthInfo({ ...authInfo, email: value });
-              }}
-              placeholder="Єлектронна адреса"
+              isFocusedInput="isFocusedLogin"
+              setIsFocusedInput="setIsFocusedLogin"
+              valueInput={authInfo.name}
+              onChange={(value) => setAuthInfo({ ...authInfo, name: value })}
+              placeholder="Логін"
+              onInputIsFocused={setInputIsFocused}
             />
+            <View style={styles.InputWrapp}>
+              <Input
+                isFocusedInput="isFocusedEmail"
+                setIsFocusedInput="setIsFocusedEmail"
+                valueInput={authInfo.email}
+                onChange={(value) => {
+                  setAuthInfo({ ...authInfo, email: value });
+                }}
+                placeholder="Єлектронна адреса"
+                onInputIsFocused={setInputIsFocused}
+              />
+            </View>
+            <View style={styles.InputWrapp}>
+              <InputPassword
+                valuePassword={authInfo.password}
+                onChangeText={(value) =>
+                  setAuthInfo({ ...authInfo, password: value })
+                }
+                placeholder="Пароль"
+                onInputIsFocused={setInputIsFocused}
+              />
+            </View>
+            <View
+              style={[
+                styles.btnWrapp,
+                { display: inputIsFocused ? "none" : "flex" },
+              ]}
+            >
+              <Btn onPressBtn={keyboardHidePressBtn}>Зареєструватися</Btn>
+              <Text style={styles.redirectText}>Вже є акаунт? Увійти</Text>
+            </View>
           </View>
-          <View style={styles.InputWrapp}>
-            <InputPassword
-              valuePassword={authInfo.password}
-              onChangeText={(value) =>
-                setAuthInfo({ ...authInfo, password: value })
-              }
-              placeholder="Пароль"
-            />
-          </View>
-          <View style={styles.btnWrapp}>
-            <Btn>Зареєструватися</Btn>
-            <Text style={styles.redirectText}>Вже є акаунт? Увійти</Text>
-          </View>
-        </View>
-      </LoginBox>
+        </LoginBox>
+      </KeyboardAvoidingView>
     </AuthLayout>
   );
 };

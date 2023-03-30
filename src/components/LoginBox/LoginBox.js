@@ -1,13 +1,24 @@
 import { View, StyleSheet, Text } from "react-native";
 
-export const LoginBox = ({ registration, header, children }) => {
+export const LoginBox = ({
+  registration,
+  header,
+  children,
+  keyboardIsVisible,
+}) => {
   return (
     <View
       style={[
         styles.box,
         {
           paddingTop: registration ? 90 : 30,
-          paddingBottom: registration ? 60 : 130,
+          paddingBottom: registration
+            ? keyboardIsVisible
+              ? 20
+              : 60
+            : keyboardIsVisible
+            ? 20
+            : 130,
         },
       ]}
     >

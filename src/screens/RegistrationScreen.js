@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  TextInput,
+  // TextInput,
   KeyboardAvoidingView,
   Platform,
   Keyboard,
 } from "react-native";
 import { AuthLayout } from "../components/AuthLayout/AuthLayout";
+import { useKeyboardVisibility } from "../hooks/useKeyboardVisibility";
 import { Input } from "../components/Input/Input";
 import { InputPassword } from "../components/InputPassword/InputPassword";
 import { Btn } from "../components/Btn/Btn";
@@ -18,12 +19,12 @@ const defaultAuthInfo = { name: "", email: "", password: "" };
 
 export const RegistrationScreen = () => {
   const [authInfo, setAuthInfo] = useState(defaultAuthInfo);
-  const [inputIsFocused, setInputIsFocused] = useState(false);
+  // const [inputIsFocused, setInputIsFocused] = useState(false);
 
-  useEffect(() => {});
+  const { keyboardIsVisible } = useKeyboardVisibility();
 
   const keyboardHide = () => {
-    setInputIsFocused(false);
+    // setInputIsFocused(false);
     Keyboard.dismiss();
   };
 
@@ -41,7 +42,7 @@ export const RegistrationScreen = () => {
         <LoginBox
           registration={true}
           header="Реєстрація"
-          keyboardIsVisible={inputIsFocused}
+          keyboardIsVisible={keyboardIsVisible}
         >
           <View style={styles.InputsWrapp}>
             <Input
@@ -50,7 +51,7 @@ export const RegistrationScreen = () => {
               valueInput={authInfo.name}
               onChange={(value) => setAuthInfo({ ...authInfo, name: value })}
               placeholder="Логін"
-              onInputIsFocused={setInputIsFocused}
+              // onInputIsFocused={setInputIsFocused}
             />
             <View style={styles.InputWrapp}>
               <Input
@@ -61,7 +62,7 @@ export const RegistrationScreen = () => {
                   setAuthInfo({ ...authInfo, email: value });
                 }}
                 placeholder="Єлектронна адреса"
-                onInputIsFocused={setInputIsFocused}
+                // onInputIsFocused={setInputIsFocused}
               />
             </View>
             <View style={styles.InputWrapp}>
@@ -71,13 +72,13 @@ export const RegistrationScreen = () => {
                   setAuthInfo({ ...authInfo, password: value })
                 }
                 placeholder="Пароль"
-                onInputIsFocused={setInputIsFocused}
+                // onInputIsFocused={setInputIsFocused}
               />
             </View>
             <View
               style={[
                 styles.btnWrapp,
-                { display: inputIsFocused ? "none" : "flex" },
+                { display: keyboardIsVisible ? "none" : "flex" },
               ]}
             >
               <Btn onPressBtn={keyboardHidePressBtn}>Зареєструватися</Btn>

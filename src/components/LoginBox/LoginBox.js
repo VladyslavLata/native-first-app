@@ -1,4 +1,5 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Keyboard } from "react-native";
+// import { useState, useEffect } from "react";
 
 export const LoginBox = ({
   registration,

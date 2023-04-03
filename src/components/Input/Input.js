@@ -9,7 +9,7 @@ export const Input = ({
   onChange,
   isFocusedInput,
   setIsFocusedInput,
-  onInputIsFocused,
+  // onInputIsFocused,
 }) => {
   const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl(
     `${isFocusedInput}`,
@@ -30,7 +30,7 @@ export const Input = ({
       onBlur={onBlurInput}
       onFocus={() => {
         onFocusedInput();
-        onInputIsFocused(true);
+        // onInputIsFocused(true);
       }}
       cursorColor={"#FF6C00"}
       placeholder={placeholder}

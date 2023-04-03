@@ -8,7 +8,7 @@ export const InputPassword = ({
   valuePassword,
   placeholder,
   onChangeText,
-  onInputIsFocused,
+  // onInputIsFocused,
 }) => {
   const [currentIcon, setCurrentIcon] = useState("visibility");
   const { isFocused, onBlurInput, onFocusedInput } = useInputFocusedControl(
@@ -40,7 +40,7 @@ export const InputPassword = ({
         onBlur={onBlurInput}
         onFocus={() => {
           onFocusedInput();
-          onInputIsFocused(true);
+          // onInputIsFocused(true);
         }}
         cursorColor={"#FF6C00"}
         placeholder={placeholder}

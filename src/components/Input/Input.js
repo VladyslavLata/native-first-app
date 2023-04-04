@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 8,
+    fontFamily: "Roboto-R",
     fontSize: 16,
     lineHeight: 1.18,
     color: "#212121",

@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 35,
     fontSize: 35,
-    fontWeight: "500",
-    lineHeight: 1.6,
+    fontFamily: "Roboto-M",
+    fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
     color: "#212121",

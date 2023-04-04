@@ -1,11 +1,11 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export const Btn = ({ children, onPressBtn }) => {
+export const BtnChangeAuthScreens = ({ onPressNavigate, children }) => {
   return (
     <TouchableOpacity
-      style={styles.btn}
+      style={styles.btnNavigate}
       activeOpacity={0.8}
-      onPress={onPressBtn}
+      onPress={onPressNavigate}
     >
       <Text style={styles.text}>{children}</Text>
     </TouchableOpacity>
@@ -13,16 +13,15 @@ export const Btn = ({ children, onPressBtn }) => {
 };
 
 const styles = StyleSheet.create({
-  btn: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 50,
+  btnNavigate: {
     width: "100%",
-    backgroundColor: "#ff6c00",
-    borderRadius: 25,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   text: {
+    fontFamily: "Roboto-R",
     fontSize: 16,
-    fontStyle: "Roboto-R",
+    textAlign: "center",
+    color: "#1B4371",
   },
 });

@@ -13,11 +13,12 @@ import { useKeyboardVisibility } from "../hooks/useKeyboardVisibility";
 import { Input } from "../components/Input/Input";
 import { InputPassword } from "../components/InputPassword/InputPassword";
 import { Btn } from "../components/Btn/Btn";
+import { BtnChangeAuthScreens } from "../components/BtnChangeAuthScreens/BtnChangeAuthScreens";
 import { LoginBox } from "../components/LoginBox/LoginBox";
 
 const defaultLoginInfo = { email: "", password: "" };
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
   const [authInfo, setAuthInfo] = useState(defaultLoginInfo);
   // const [inputIsFocused, setInputIsFocused] = useState(false);
 
@@ -70,9 +71,14 @@ export const LoginScreen = () => {
               ]}
             >
               <Btn onPressBtn={keyboardHidePressBtn}>Увійти</Btn>
-              <Text style={styles.redirectText}>
+              <BtnChangeAuthScreens
+                onPressNavigate={() => navigation.navigate("Registration")}
+              >
                 Немає акаунту? Зареєструватися
-              </Text>
+              </BtnChangeAuthScreens>
+              {/* <Text style={styles.redirectText}>
+                Немає акаунту? Зареєструватися
+              </Text> */}
             </View>
           </View>
         </LoginBox>
@@ -98,5 +104,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     textAlign: "center",
     color: "#1B4371",
+    fontFamily: "Roboto-R",
+    fontSize: 16,
   },
 });

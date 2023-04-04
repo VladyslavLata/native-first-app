@@ -14,10 +14,11 @@ import { Input } from "../components/Input/Input";
 import { InputPassword } from "../components/InputPassword/InputPassword";
 import { Btn } from "../components/Btn/Btn";
 import { LoginBox } from "../components/LoginBox/LoginBox";
+import { BtnChangeAuthScreens } from "../components/BtnChangeAuthScreens/BtnChangeAuthScreens";
 
 const defaultAuthInfo = { name: "", email: "", password: "" };
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({ navigation }) => {
   const [authInfo, setAuthInfo] = useState(defaultAuthInfo);
   // const [inputIsFocused, setInputIsFocused] = useState(false);
 
@@ -82,7 +83,12 @@ export const RegistrationScreen = () => {
               ]}
             >
               <Btn onPressBtn={keyboardHidePressBtn}>Зареєструватися</Btn>
-              <Text style={styles.redirectText}>Вже є акаунт? Увійти</Text>
+              <BtnChangeAuthScreens
+                onPressNavigate={() => navigation.navigate("Login")}
+              >
+                Вже є акаунт? Увійти
+              </BtnChangeAuthScreens>
+              {/* <Text style={styles.redirectText}>Вже є акаунт? Увійти</Text> */}
             </View>
           </View>
         </LoginBox>
@@ -108,5 +114,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     textAlign: "center",
     color: "#1B4371",
+    fontFamily: "Roboto-R",
+    fontSize: 16,
   },
 });

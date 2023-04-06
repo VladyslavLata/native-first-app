@@ -32,6 +32,7 @@ export const LoginScreen = ({ navigation }) => {
   const keyboardHidePressBtn = () => {
     keyboardHide();
     setAuthInfo(defaultLoginInfo);
+    // navigation.navigate("Home");
   };
 
   return (

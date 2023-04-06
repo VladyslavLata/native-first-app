@@ -1,11 +1,13 @@
 import React, { StrictMode, useCallback } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+// import { StyleSheet, Text, View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+
 import { RegistrationScreen } from "./src/screens/RegistrationScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
-import { useFonts } from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Home } from "./src/screens/MainScreens/Home";
+import { useAppRouter } from "./router";
 
 // import * as SplashScreen from "expo-splash-screen";
 
@@ -13,6 +15,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   const AuthStack = createNativeStackNavigator();
+  const router = useAppRouter(true);
 
   const [fontsLoaded] = useFonts({
     "Roboto-M": require("./assets/fonts/Roboto-Medium.ttf"),
@@ -25,7 +28,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AuthStack.Navigator>
+      {router}
+      {/* <AuthStack.Navigator initialRouteName="Login">
         <AuthStack.Screen
           name="Registration"
           options={{ headerShown: false }}
@@ -36,7 +40,12 @@ export default function App() {
           options={{ headerShown: false }}
           component={LoginScreen}
         />
-      </AuthStack.Navigator>
+        <AuthStack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={Home}
+        />
+      </AuthStack.Navigator> */}
     </NavigationContainer>
   );
 }

@@ -1,6 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
@@ -10,29 +13,65 @@ export const Home = () => {
   const Tabs = createBottomTabNavigator();
 
   return (
-    <Tabs.Navigator initialRouteName="PostsScreen">
+    <Tabs.Navigator
+      initialRouteName="PostsScreen"
+      screenOptions={({ route }) => ({
+        tabBarShowLabel: false,
+        headerTitleStyle: {
+          color: "#212121",
+          fontSize: 17,
+          fontFamily: "Roboto-M",
+          lineHeight: 22,
+        },
+
+        headerTitleAlign: "center",
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === "PostsScreen") {
+            return (
+              <SimpleLineIcons
+                name="grid"
+                size={24}
+                color={"rgba(33,33,33, 0.5)"}
+              />
+            );
+          } else if (route.name === "CreatePostsScreen") {
+            return (
+              <View style={styles.tabBtn}>
+                <MaterialIcons name="add" size={24} color="#ffffff" />
+              </View>
+            );
+          } else if (route.name === "ProfileScreen") {
+            return (
+              <Ionicons
+                name="person-outline"
+                size={24}
+                color={"rgba(33,33,33, 0.5)"}
+              />
+            );
+          }
+        },
+      })}
+    >
       <Tabs.Screen
         name="PostsScreen"
         component={PostsScreen}
         options={{
           title: "Публікації",
-          tabBarShowLabel: true,
-          headerTitleStyle: {
-            color: "#212121",
-            fontSize: 17,
-            fontFamily: "Roboto-M",
-            lineHeight: 22,
-          },
-          headerStyle: { backgroundColor: "red" },
-          tabBarLabelStyle: { color: "red" },
-          headerTitleAlign: "center",
         }}
       />
-      <Tabs.Screen name="CreatePostsScreen" component={CreatePostsScreen} />
+      <Tabs.Screen
+        name="CreatePostsScreen"
+        component={CreatePostsScreen}
+        options={{
+          title: "Створити публікацію",
+        }}
+      />
       <Tabs.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Tabs.Navigator>
   );
@@ -43,5 +82,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  tabBtn: {
+    marginBottom: 10,
+    width: 70,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ff6c00",
+    borderRadius: 35,
   },
 });

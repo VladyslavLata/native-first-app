@@ -28,11 +28,18 @@ export const Home = () => {
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "PostsScreen") {
             return (
-              <SimpleLineIcons
-                name="grid"
-                size={24}
-                color={"rgba(33,33,33, 0.5)"}
-              />
+              <View
+                style={[
+                  styles.iconTabWrapp,
+                  { alignItems: "flex-end", paddingRight: 12 },
+                ]}
+              >
+                <SimpleLineIcons
+                  name="grid"
+                  size={24}
+                  color={"rgba(33,33,33, 0.5)"}
+                />
+              </View>
             );
           } else if (route.name === "CreatePostsScreen") {
             return (
@@ -42,11 +49,13 @@ export const Home = () => {
             );
           } else if (route.name === "ProfileScreen") {
             return (
-              <Ionicons
-                name="person-outline"
-                size={24}
-                color={"rgba(33,33,33, 0.5)"}
-              />
+              <View style={[styles.iconTabWrapp, { paddingLeft: 12 }]}>
+                <Ionicons
+                  name="person-outline"
+                  size={24}
+                  color={"rgba(33,33,33, 0.5)"}
+                />
+              </View>
             );
           }
         },
@@ -83,8 +92,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  iconTabWrapp: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+  },
   tabBtn: {
-    marginBottom: 10,
     width: 70,
     height: 40,
     justifyContent: "center",

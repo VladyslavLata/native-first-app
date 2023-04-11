@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -8,6 +8,27 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
+
+const screens = [
+  {
+    element: PostsScreen,
+    title: "Публікації",
+    routerName: "PostsScreen",
+    headerShown: true,
+  },
+  {
+    element: CreatePostsScreen,
+    title: "Створити публікацію",
+    routerName: "CreatePostsScreen",
+    headerShown: true,
+  },
+  {
+    element: ProfileScreen,
+    title: "Профіль",
+    routerName: "ProfileScreen",
+    headerShown: false,
+  },
+];
 
 export const Home = () => {
   const Tabs = createBottomTabNavigator();
@@ -61,7 +82,18 @@ export const Home = () => {
         },
       })}
     >
-      <Tabs.Screen
+      {screens.map(({ title, headerShown, element, routerName }) => (
+        <Tabs.Screen
+          key={routerName}
+          name={routerName}
+          component={element}
+          options={{
+            title: title,
+            headerShown: headerShown,
+          }}
+        />
+      ))}
+      {/* <Tabs.Screen
         name="PostsScreen"
         component={PostsScreen}
         options={{
@@ -81,7 +113,7 @@ export const Home = () => {
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
     </Tabs.Navigator>
   );
 };

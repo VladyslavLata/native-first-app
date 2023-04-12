@@ -31,13 +31,23 @@ const screens = [
 ];
 
 export const Home = () => {
+  // const [backWithCreatePost, setBackWithCreatePost] = useState(null);
   const Tabs = createBottomTabNavigator();
 
   return (
     <Tabs.Navigator
+      backBehaviour="initialRoute"
       initialRouteName="PostsScreen"
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
+        tabBarStyle:
+          route.name === "CreatePostsScreen"
+            ? {
+                position: "absolute",
+                left: 0,
+                bottom: -20,
+              }
+            : {},
         headerTitleStyle: {
           color: "#212121",
           fontSize: 17,
@@ -82,7 +92,7 @@ export const Home = () => {
         },
       })}
     >
-      {screens.map(({ title, headerShown, element, routerName }) => (
+      {/* {screens.map(({ title, headerShown, element, routerName }) => (
         <Tabs.Screen
           key={routerName}
           name={routerName}
@@ -92,8 +102,8 @@ export const Home = () => {
             headerShown: headerShown,
           }}
         />
-      ))}
-      {/* <Tabs.Screen
+      ))} */}
+      <Tabs.Screen
         name="PostsScreen"
         component={PostsScreen}
         options={{
@@ -103,9 +113,7 @@ export const Home = () => {
       <Tabs.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}
-        options={{
-          title: "Створити публікацію",
-        }}
+        options={{ headerShown: false }}
       />
       <Tabs.Screen
         name="ProfileScreen"
@@ -113,7 +121,7 @@ export const Home = () => {
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
     </Tabs.Navigator>
   );
 };

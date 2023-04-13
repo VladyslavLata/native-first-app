@@ -4,10 +4,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { getHeaderTitle } from "@react-navigation/elements";
+import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 import { PostsScreen } from "./PostsScreen";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
+import { Header } from "../../components/Header/Header";
+import { IconBtn } from "../../components/IconBtn/IconBtn";
 
 const screens = [
   {
@@ -43,19 +48,49 @@ export const Home = () => {
         tabBarStyle:
           route.name === "CreatePostsScreen"
             ? {
+                borderTopWidth: 1,
+                borderTopColor: "rgba(0,0,0,.3)",
                 position: "absolute",
                 left: 0,
-                bottom: -20,
+                bottom: -200,
               }
-            : {},
-        headerTitleStyle: {
-          color: "#212121",
-          fontSize: 17,
-          fontFamily: "Roboto-M",
-          lineHeight: 22,
-        },
+            : { borderTopWidth: 1, borderTopColor: "rgba(0,0,0,.3)" },
+        // headerTitleStyle: {},
+        // headerStyle: {
+        //   color: "#212121",
+        //   fontSize: 37,
+        //   fontFamily: "Roboto-M",
+        //   lineHeight: 22,
+        //   color: "blue",
+        // },
 
         headerTitleAlign: "center",
+        header: ({ navigation, route, options }) => {
+          const title = getHeaderTitle(options, route.name);
+
+          return (
+            <Header title={title}>
+              {route.name === "CreatePostsScreen" && (
+                <IconBtn
+                  icon={AntDesign}
+                  iconName={"arrowleft"}
+                  onPress={() => navigation.goBack()}
+                  stylesBtn={"backBtn"}
+                  color={"rgba(33,33,33,.8)"}
+                />
+              )}
+              {route.name === "PostsScreen" && (
+                <IconBtn
+                  icon={Feather}
+                  iconName={"log-out"}
+                  onPress={() => {}}
+                  stylesBtn={"logOutBtn"}
+                  color={"#bdbdbd"}
+                />
+              )}
+            </Header>
+          );
+        },
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "PostsScreen") {
             return (
@@ -113,7 +148,7 @@ export const Home = () => {
       <Tabs.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}
-        options={{ headerShown: false }}
+        options={{ title: "Створити публікацію" }}
       />
       <Tabs.Screen
         name="ProfileScreen"
@@ -144,5 +179,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#ff6c00",
     borderRadius: 35,
+  },
+  headerBtn: {
+    position: "absolute",
+    left: 0,
+    bottom: 0,
+    padding: 15,
+    paddingBottom: 10,
+  },
+  backBtn: {
+    left: 0,
+  },
+  exitBtn: {
+    right: 0,
   },
 });

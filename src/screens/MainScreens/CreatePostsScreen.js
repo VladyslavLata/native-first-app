@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Camera } from "expo-camera";
+import { FontAwesome } from "@expo/vector-icons";
 
-// import { DefaultCreatePosrtScreen } from "../nestedScreens/DefaultCreatePosrtScreen";
-import { getHeaderTitle } from "@react-navigation/elements";
-export const CreatePostsScreen = ({ navigation }) => {
-  console.log(navigation);
-  // setBackWithCreatePost(navigation.navigate("PostsScreen"));
+export const CreatePostsScreen = () => {
+  const [photo, setPhoto] = useState(null);
   return (
     <View style={styles.wrapp}>
-      <Text>CreatePostsScreen!</Text>
+      <View style={styles.wrappCamera}>
+        <Camera style={styles.camera}>
+          <TouchableOpacity style={styles.snap} activeOpacity={0.6}>
+            <FontAwesome
+              name="camera"
+              size={24}
+              color={photo ? "#ffffff" : "#bdbdbd"}
+            />
+          </TouchableOpacity>
+        </Camera>
+      </View>
     </View>
   );
 };
@@ -17,58 +25,34 @@ export const CreatePostsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   wrapp: {
     flex: 1,
+    // width: "100%",
+    // height: "100%",
+    paddingTop: 30,
+    paddingHorizontal: 15,
+    backgroundColor: "red",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  wrappCamera: {
+    // position: "relative",
+    borderWidth: 1,
+    borderColor: "#e8e8e8",
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  camera: {
+    width: "100%",
+    height: 240,
+    backgroundColor: "#f6f6f6",
     justifyContent: "center",
     alignItems: "center",
   },
+  snap: {
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 30,
+    backgroundColor: "#ffffff",
+  },
 });
-
-// const MyBackButton = ({ onPress }) => {
-//   return (
-//     <TouchableOpacity onPress={onPress}>
-//       <Text style={{ color: "green" }}>GGGG</Text>
-//     </TouchableOpacity>
-//   );
-// };
-
-// const MyHeader = ({ title, leftButton }) => {
-//   return (
-//     <View style={{ width: "100%", height: 50, backgroundColor: "red" }}>
-//       <Text style={{ textAlign: "center" }}>{title}</Text>
-//       {leftButton}
-//       {/* <MyBackButton /> */}
-//     </View>
-//   );
-// };
-
-// export const CreatePostsScreen = ({ navigation }) => {
-//   const Stack = createNativeStackNavigator();
-
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="DefaultCreatePosrtScreen"
-//         options={{
-//           // headerShown: true,
-//           // headerBackVisible: true,
-//           header: ({ navigation, route, options, back }) => {
-//             const title = getHeaderTitle(options, route.name);
-//             console.log("back", back);
-
-//             return (
-//               <MyHeader
-//                 title={title}
-//                 leftButton={
-//                   !back ? (
-//                     <MyBackButton onPress={() => navigation.goBack()} />
-//                   ) : undefined
-//                 }
-//                 style={options.headerStyle}
-//               />
-//             );
-//           },
-//         }}
-//         component={DefaultCreatePosrtScreen}
-//       />
-//     </Stack.Navigator>
-//   );
-// };

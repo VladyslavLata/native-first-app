@@ -4,7 +4,7 @@ import { Keyboard } from "react-native";
 export const useKeyboardVisibility = () => {
   const [keyboardIsVisible, setKeyboardisVisible] = useState(false);
 
-  console.log(keyboardIsVisible);
+  // console.log(keyboardIsVisible);
   useEffect(() => {
     const showKeyboard = Keyboard.addListener("keyboardDidShow", () => {
       setKeyboardisVisible(true);

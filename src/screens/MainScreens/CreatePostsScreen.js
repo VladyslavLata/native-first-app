@@ -245,4 +245,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#f6f6f6",
     borderRadius: 20,
   },
+  cleanBtns: {
+    width: 70,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f6f6f6",
+    borderRadius: 20,
+  },
 });

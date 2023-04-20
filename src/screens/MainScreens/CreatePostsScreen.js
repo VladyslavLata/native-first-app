@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
@@ -29,7 +30,7 @@ export const CreatePostsScreen = () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       await MediaLibrary.requestPermissionsAsync();
 
-      setHasPermission(status === "1granted");
+      setHasPermission(status === "granted");
     })();
   }, []);
 
@@ -83,26 +84,35 @@ export const CreatePostsScreen = () => {
         {!keyboardIsVisible && (
           <>
             <View style={styles.wrappCamera}>
-              <Camera style={styles.camera} ref={setCamera}>
-                <TouchableOpacity
-                  style={[
-                    styles.snap,
-                    {
-                      backgroundColor: photo
-                        ? "rgba(255,255,255, .3)"
-                        : "#ffffff",
-                    },
-                  ]}
-                  activeOpacity={0.6}
-                  onPress={takePhoto}
-                >
-                  <FontAwesome
-                    name="camera"
-                    size={24}
-                    color={photo ? "#ffffff" : "#bdbdbd"}
-                  />
-                </TouchableOpacity>
-              </Camera>
+              <Camera style={styles.camera} ref={setCamera}></Camera>
+              {photo && (
+                <Image
+                  source={{ uri: photo }}
+                  // contentFit={"contain"}
+                  // objectPosition={"10px 10px"}
+                  style={styles.img}
+                  width="100%"
+                  height="100%"
+                />
+              )}
+              <TouchableOpacity
+                style={[
+                  styles.snap,
+                  {
+                    backgroundColor: photo
+                      ? "rgba(255,255,255, .3)"
+                      : "#ffffff",
+                  },
+                ]}
+                activeOpacity={0.6}
+                onPress={takePhoto}
+              >
+                <FontAwesome
+                  name="camera"
+                  size={24}
+                  color={photo ? "#ffffff" : "#bdbdbd"}
+                />
+              </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={styles.photoTextWrapp}
@@ -115,7 +125,6 @@ export const CreatePostsScreen = () => {
             </TouchableOpacity>
           </>
         )}
-
         <View style={[styles.inputWrapp, { marginTop: 32 }]}>
           <TextInput
             style={[styles.input, { fontFamily: "Roboto-M" }]}
@@ -154,15 +163,17 @@ export const CreatePostsScreen = () => {
         >
           Опублікувати
         </Btn>
-        <View style={styles.cleanBtnWrapp}>
-          <TouchableOpacity
-            style={styles.cleanBtn}
-            onPress={onCleanPost}
-            activeOpacity={0.6}
-          >
-            <AntDesign name="delete" size={24} color="#bdbdbd" />
-          </TouchableOpacity>
-        </View>
+        {!keyboardIsVisible && (
+          <View style={styles.cleanBtnWrapp}>
+            <TouchableOpacity
+              style={styles.cleanBtn}
+              onPress={onCleanPost}
+              activeOpacity={0.6}
+            >
+              <AntDesign name="delete" size={24} color="#bdbdbd" />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -180,20 +191,32 @@ const styles = StyleSheet.create({
     // alignItems: "center",
   },
   wrappCamera: {
-    // position: "relative",
+    position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: 240,
     borderWidth: 1,
     borderColor: "#e8e8e8",
     borderRadius: 8,
     overflow: "hidden",
   },
   camera: {
+    // flex: 1,
     width: "100%",
-    height: 240,
+    height: "100%",
+    objectFit: "contain",
     backgroundColor: "#f6f6f6",
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  img: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
   },
   snap: {
+    position: "absolute",
     width: 60,
     height: 60,
     justifyContent: "center",
@@ -238,14 +261,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cleanBtn: {
-    width: 70,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f6f6f6",
-    borderRadius: 20,
-  },
-  cleanBtns: {
     width: 70,
     height: 40,
     justifyContent: "center",
